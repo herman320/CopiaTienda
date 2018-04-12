@@ -29,24 +29,24 @@ public class CartController {
 		if(result!=null) {
 			switch(result) {
 				case "added":
-					mv.addObject("message", "Product has been successfully added inside cart!");					
+					mv.addObject("message", "Producto ha sido agregado correctamente al cart!");					
 					cartService.validateCartLine();
 					break;
 				case "unavailable":
-					mv.addObject("message", "Product quantity is not available!");					
+					mv.addObject("message", "cantidad del producto no disponible!");					
 					break;
 				case "updated":
-					mv.addObject("message", "Cart has been updated successfully!");					
+					mv.addObject("message", "Cart has sido actulizado correctaente!");					
 					cartService.validateCartLine();
 					break;
 				case "modified":
-					mv.addObject("message", "One or more items inside cart has been modified!");
+					mv.addObject("message", "Uno o mas articulos han sido modificados!");
 					break;
 				case "maximum":
-					mv.addObject("message", "Maximum limit for the item has been reached!");
+					mv.addObject("message", "Cantidad maxima de articulos ha sido alcanzada!");
 					break;
 				case "deleted":
-					mv.addObject("message", "CartLine has been successfully removed!");
+					mv.addObject("message", "Line de cart ha sido removida exitosamente!");
 					break;
 
 			}

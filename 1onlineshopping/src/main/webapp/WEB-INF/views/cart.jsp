@@ -63,7 +63,7 @@
 						<td class="text-center"><strong>Total Q. ${userModel.cart.grandTotal}</strong></td>
 					</tr>
 					<tr>
-						<td><a href="${contextRoot}/show/all/products" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left"></span> Continue Shopping</a></td>
+						<td><a href="${contextRoot}/show/all/products" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left"></span> Continuar comprando</a></td>
 						<td colspan="2" class="hidden-xs"></td>
 						<td class="hidden-xs text-center"><strong>Total Q. ${userModel.cart.grandTotal}/-</strong></td>
 						

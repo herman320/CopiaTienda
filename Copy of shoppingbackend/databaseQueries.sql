@@ -145,3 +145,120 @@ VALUES (4, '102 Sabarmati Society, Mahatma Gandhi Road', 'Near Salt Lake, Gandhi
 -- adding a cart for testing 
 INSERT INTO cart (user_id, grand_total, cart_lines) VALUES (4, 0, 0);
 
+-- ///////////////////////////////////////////////////////
+
+-- ///////////////////////////////////////////////////////
+--ESPAÑOL
+-- ///////////////////////////////////////////////////////
+
+CREATE TABLE categoria (
+	id int,
+	nombre VARCHAR(50),
+	descripcion VARCHAR(255),
+	imagen_url VARCHAR(50),
+	esta_activo bit,
+	CONSTRAINT pk_categoria_id PRIMARY KEY (id) 
+
+);
+
+CREATE TABLE usuario_detalles (
+	id int,
+	nombre VARCHAR(50),
+	apellido VARCHAR(50),
+	role VARCHAR(50),
+	disponible bit,
+	contraseña VARCHAR(60),
+	correo VARCHAR(100),
+	numero_telefonico VARCHAR(15),	
+	CONSTRAINT pk_usuario_id PRIMARY KEY(id)
+);
+
+
+CREATE TABLE producto (
+	id int,
+	codigo VARCHAR(20),
+	nombre VARCHAR(50),
+	marca VARCHAR(50),
+	descripcion VARCHAR(255),
+	precio_unidad DECIMAL(10,2),
+	cantidad INT,
+	esta_activo bit,
+	categoria_id INT,
+	proveedor_id INT,
+	ventas INT DEFAULT 0,
+	vistas INT DEFAULT 0,
+	CONSTRAINT pk_producto_id PRIMARY KEY (id),
+ 	CONSTRAINT fk_producto_categoria_id FOREIGN KEY (categoria_id) REFERENCES categoria (id),
+	CONSTRAINT fk_producto_proveedor_id FOREIGN KEY (proveedor_id) REFERENCES usuario_detalles(id),	
+);	
+
+-- the address table to store the user billing and shipping addresses
+CREATE TABLE direccion (
+	id int,
+	usuario_id int,
+	direccion_primera_linea VARCHAR(100),
+	direccion_segunda_linea VARCHAR(100),
+	ciudad VARCHAR(20),
+	estado VARCHAR(20),
+	pais VARCHAR(20),
+	codigo_postal VARCHAR(10),
+	esta_facturación bit,
+	esta_enviado bit,
+	CONSTRAINT fk_direccion_usuario_id FOREIGN KEY (usuario_id ) REFERENCES usuario_detalles (id),
+	CONSTRAINT pk_direccion_id PRIMARY KEY (id)
+);
+
+-- the cart table to store the user cart top-level details
+CREATE TABLE carrito (
+	id int,
+	usuario_id int,
+	gran_total DECIMAL(10,2),
+	carrito_lineas int,
+	CONSTRAINT fk_carrito_usuario_id FOREIGN KEY (usuario_id ) REFERENCES usuario_detalles (id),
+	CONSTRAINT pk_carrito_id PRIMARY KEY (id)
+);
+-- the cart line table to store the cart details
+
+CREATE TABLE carrito_linea (
+	id int,
+	carrito_id int,
+	total DECIMAL(10,2),
+	producto_id int,
+	producto_conteo int,
+	precio_de_compra DECIMAL(10,2),
+	esta_disponible bit,
+	CONSTRAINT fk_carritolinea_product_id FOREIGN KEY (producto_id ) REFERENCES producto (id),
+	CONSTRAINT pk_carritolinea_id PRIMARY KEY (id)
+);
+
+
+-- the order detail table to store the order
+
+CREATE TABLE orden_detalles (
+	id int,
+	usuario_id int,
+	orden_total DECIMAL(10,2),
+	orden_conteo int,
+	direccion_id int,
+	facturacion_id int,
+	orden_fecha date,
+	CONSTRAINT fk_orden_detalles_usuario_id FOREIGN KEY (usuario_id) REFERENCES usuario_detalles (id),
+	CONSTRAINT fk_orden_detalles_direccion_id FOREIGN KEY (direccion_id) REFERENCES direccion (id),
+	CONSTRAINT fk_orden_detalles_facturacion_id FOREIGN KEY (facturacion_id) REFERENCES direccion (id),
+	CONSTRAINT pk_orden_detalles_id PRIMARY KEY (id)
+);
+
+-- the order item table to store order items
+
+CREATE TABLE orden_articulo (
+	id int,
+	orden_id int,
+	total DECIMAL(10,2),
+	producto_id int,
+	producto_conteo int,
+	precio_de_compra DECIMAL(10,2),
+	CONSTRAINT fk_orden_articulo_producto_id FOREIGN KEY (producto_id) REFERENCES producto (id),
+	CONSTRAINT fk_orden_articulo_orden_id FOREIGN KEY (orden_id) REFERENCES orden_detalles (id),
+	CONSTRAINT pk_orden_articulo_id PRIMARY KEY (id)
+);
+

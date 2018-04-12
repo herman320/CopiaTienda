@@ -64,8 +64,8 @@
 				
 					
 					<table id="productListTable" class="table table-striped table-borderd">
-					
-					
+				
+			
 						<thead>
 						
 							<tr>
