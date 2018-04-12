@@ -248,7 +248,7 @@ CREATE TABLE orden_detalles (
 	CONSTRAINT pk_orden_detalles_id PRIMARY KEY (id)
 );
 
--- the order item table to store order items
+-- the order item table to store order ite
 
 CREATE TABLE orden_articulo (
 	id int,
