@@ -7,7 +7,7 @@ CREATE TABLE category (
 	CONSTRAINT pk_category_id PRIMARY KEY (id) 
 
 );
-
+--
 CREATE TABLE user_detail (
 	id IDENTITY,
 	first_name VARCHAR(50),
