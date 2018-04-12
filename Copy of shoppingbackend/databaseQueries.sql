@@ -8,6 +8,7 @@ CREATE TABLE category (
 
 );
 --
+--
 CREATE TABLE user_detail (
 	id IDENTITY,
 	first_name VARCHAR(50),
